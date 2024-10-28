@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="https://cdn.pixabay.com/photo/2024/08/01/17/11/sparrow-8937767_1280.jpg" />
+    <title>イージングアニメーション</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        margin: 0;
+      }
+      
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: rgb(171, 14, 69);
+        margin: 0 20px;
+        position: relative;
+        transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+      }
+
+      .circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: lightblue;
+      }
+
+      .ellipse {
+        width: 150px;
+        height: 100px;
+        background-color: lightgreen;
+        border-radius: 50%;
+      }
+
+
+      /* ホバー時にアニメーション */
+      .box:hover {
+        transform: scale(1.5); /* ホバーで拡大 */
+      }
+
+      /* 円形にアニメーションを適用 */
+      .circle {
+        animation: scale-easeInElastic 2s ease-out infinite;
+      }
+
+      /* 楕円にアニメーションを適用 */
+      .ellipse {
+        animation: scale-easeInBounce 2s ease-out infinite;
+      }
+
+      /* アニメーション定義 */
+      @keyframes scale-easeInElastic {
+        0% { transform: scale(1); }
+        4% { transform: scale(1); }
+        8% { transform: scale(1); }
+        14% { transform: scale(1); }
+        18% { transform: scale(1); }
+        26% { transform: scale(1.01); }
+        28% { transform: scale(1.01); }
+        40% { transform: scale(0.98); }
+        42% { transform: scale(0.98); }
+        56% { transform: scale(1.05); }
+        58% { transform: scale(1.04); }
+        72% { transform: scale(0.87); }
+        86% { transform: scale(1.37); }
+        100% { transform: scale(0); }
+      }
+
+      @keyframes scale-easeInBounce {
+        0% { transform: scale(1); }
+        4% { transform: scale(0.98); }
+        8% { transform: scale(0.99); }
+        18% { transform: scale(0.94); }
+        26% { transform: scale(0.98); }
+        46% { transform: scale(0.75); }
+        64% { transform: scale(0.98); }
+        76% { transform: scale(0.44); }
+        88% { transform: scale(0.11); }
+        100% { transform: scale(0); }
+      }
+    </style>
+  </head>
+  <body>
+        <div class="box"></div>
+        <div class="label">easeInOutCubic</div>
+      </div>
+        <div class="circle"></div>
+        <div class="label">easeInElastic</div>
+      </div>
+        <div class="ellipse"></div>
+        <div class="label">easeInBounce</div>
+      </div>
+    </div>
+  </body>
+</html>

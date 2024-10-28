@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="https://cdn.pixabay.com/photo/2017/07/22/15/22/cat-2528943_1280.jpg" />
+    <title>アニメーション2</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #b3b3b3;
+        margin: 0;
+        position: relative;
+      }
+
+      /* プログレスバー全体のスタイル */
+      .progress-container {
+        width: 60%;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        height: 30px;
+        margin: 20px 0;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        line-height: 30px;
+      }
+
+      /* 共通のプログレスバーのスタイル */
+      .progress-bar {
+        height: 100%;
+        width: 0;
+        border-radius: 5px;
+        position: relative;
+      }
+
+      /* 1番目のプログレスバー - 線形で一定速度 */
+      .progress-bar-linear {
+        background-color: #76c7c0;
+        animation: progress-linear 5s linear forwards infinite;
+      }
+
+      /* 2番目のプログレスバー - バウンドしながら進行 */
+      .progress-bar-bounce {
+        background-color: #f76c6c;
+        animation: progress-bounce 5s ease forwards infinite;
+      }
+
+      /* 3番目のプログレスバー - 回転しながら進行 */
+      .progress-bar-rotate {
+        background-color: #76f76f;
+        animation: progress-rotate 5s ease-in-out forwards infinite;
+      }
+
+      /* HTML: <div class="loader"></div> */
+      .progress-bar-loader {
+        width: 100%;
+        height: 30px;
+        background: linear-gradient(#000 50%, #0000 0), linear-gradient(#0000 50%, #000 0), linear-gradient(#000 50%, #0000 0), linear-gradient(#0000 50%, #000 0), linear-gradient(#000 50%, #0000 0), linear-gradient(#0000 50%, #000 0) #ddd;
+        background-size: calc(100% / 6 + 1px) 200%;
+        background-repeat: no-repeat;
+        animation: l12 5s infinite;
+      }
+
+      /* l12 */
+      @keyframes l12 {
+        0% {
+          background-position: calc(0 * 100% / 5) 100%, calc(1 * 100% / 5) 0%, calc(2 * 100% / 5) 100%, calc(3 * 100% / 5) 0%, calc(4 * 100% / 5) 100%, calc(5 * 100% / 5) 0%;
+        }
+        16.67% {
+          background-position: calc(0 * 100% / 5) 0%, calc(1 * 100% / 5) 0%, calc(2 * 100% / 5) 100%, calc(3 * 100% / 5) 0%, calc(4 * 100% / 5) 100%, calc(5 * 100% / 5) 0%;
+        }
+        33.33% {
+          background-position: calc(0 * 100% / 5) 0%, calc(1 * 100% / 5) 100%, calc(2 * 100% / 5) 100%, calc(3 * 100% / 5) 0%, calc(4 * 100% / 5) 100%, calc(5 * 100% / 5) 0%;
+        }
+        50% {
+          background-position: calc(0 * 100% / 5) 0%, calc(1 * 100% / 5) 100%, calc(2 * 100% / 5) 0%, calc(3 * 100% / 5) 0%, calc(4 * 100% / 5) 100%, calc(5 * 100% / 5) 0%;
+        }
+        66.67% {
+          background-position: calc(0 * 100% / 5) 0%, calc(1 * 100% / 5) 100%, calc(2 * 100% / 5) 0%, calc(3 * 100% / 5) 100%, calc(4 * 100% / 5) 100%, calc(5 * 100% / 5) 0%;
+        }
+        83.33% {
+          background-position: calc(0 * 100% / 5) 0%, calc(1 * 100% / 5) 100%, calc(2 * 100% / 5) 0%, calc(3 * 100% / 5) 100%, calc(4 * 100% / 5) 0%, calc(5 * 100% / 5) 0%;
+        }
+        100% {
+          background-position: calc(0 * 100% / 5) 0%, calc(1 * 100% / 5) 100%, calc(2 * 100% / 5) 0%, calc(3 * 100% / 5) 100%, calc(4 * 100% / 5) 0%, calc(5 * 100% / 5) 100%;
+        }
+      }
+      /* 線形アニメーション */
+      @keyframes progress-linear {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+
+      /* バウンドアニメーション */
+      @keyframes progress-bounce {
+        0% {
+          width: 0;
+        }
+        30% {
+          width: 40%;
+        }
+        50% {
+          width: 60%;
+        }
+        70% {
+          width: 80%;
+        }
+        90% {
+          width: 90%;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+
+      /* 回転しながら進行するアニメーション */
+      @keyframes progress-rotate {
+        0% {
+          width: 0;
+          transform: rotate(0deg);
+        }
+        50% {
+          width: 50%;
+          transform: rotate(180deg);
+        }
+        100% {
+          width: 100%;
+          transform: rotate(360deg);
+        }
+      }
+
+      /* 左下の「前へ戻る」リンク */
+      .prev {
+        position: absolute;
+        left: 20px;
+        bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>進行中</h1>
+
+    <!-- 1番目のプログレスバー：線形アニメーション -->
+    <div class="progress-container">
+      <div class="progress-bar progress-bar-linear">進行中...</div>
+    </div>
+
+    <!-- 2番目のプログレスバー：バウンドアニメーション -->
+    <div class="progress-container">
+      <div class="progress-bar progress-bar-bounce">進行中...</div>
+    </div>
+
+    <!-- 3番目のプログレスバー：回転アニメーション -->
+    <div class="progress-container">
+      <div class="progress-bar progress-bar-rotate">進行中...</div>
+    </div>
+
+    <!-- 4番目のプログレスバー：l12-->
+    <div class="progress-container">
+      <div class="progress-bar progress-bar-loader">進行中...</div>
+    </div>
+
+    <!-- 「前へ戻る」リンク -->
+    <div class="prev">
+      <a href="index.html">前へ戻る</a>
+    </div>
+  </body>
+</html>

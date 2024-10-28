@@ -1,62 +1,393 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ease Out Elastic Animation</title>
+    <link rel="icon" type="image/png" href="https://cdn.pixabay.com/photo/2024/08/01/17/11/sparrow-8937767_1280.jpg" />
+    <title>イージングアニメーション</title>
     <style>
       body {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         height: 100vh;
+        background-color: #b3b3b3;
         margin: 0;
-        background-color: #f0f0f0;
       }
 
-      #box {
+      .next {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        grid-gap: 60px;
+      }
+
+      /* 円形の共通スタイル */
+      .circle {
         width: 100px;
         height: 100px;
-        background-color: lightcoral;
-        animation: scale-easeOutElastic 2s ease-out forwards;
+        border-radius: 50%;
+        margin: 0 auto;
+        position: relative;
       }
 
-      @keyframes scale-easeOutElastic {
+      /* 各色のスタイル */
+      .circle-1-easeInBack {
+        background-color: rgb(255, 99, 132);
+        transition: transform 0.6s cubic-bezier(0.36, 0, 0.66, -0.56);
+      }
+
+      .circle-2-easeOutBack {
+        background-color: rgb(54, 162, 235);
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .circle-3-easeInOutBack {
+        background-color: rgb(255, 206, 86);
+        transition: transform 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+      }
+
+      .circle-4-easeInElastic {
+        background-color: rgb(83, 196, 249);
+        animation: scale-easeInElastic 2s ease-out infinite;
+      }
+
+      .circle-5-easeInBounce {
+        background-color: rgb(133, 238, 101);
+        animation: scale-easeInBounce 2s ease-out infinite;
+      }
+
+      .circle-6-easeInOutBounce {
+        background-color: rgb(90, 83, 221);
+        animation: scale-easeInOutBounce 2s ease-out infinite;
+      }
+
+      .circle-7-rotate-hor-center {
+        background-color: rgb(153, 102, 255);
+        animation: rotate-hor-center 1.5s infinite; /* 回転アニメーションを追加 */
+      }
+
+      .circle-8-rotate-scale-down-diag-2 {
+        background-color: rgb(255, 159, 64);
+        animation: rotate-scale-down-diag-2 1s infinite; /* 回転アニメーションを追加 */
+      }
+
+      .circle-9-shadow-drop-2-center {
+        background-color: rgb(75, 192, 192);
+        animation: shadow-drop-2-center 3s infinite; /* 回転アニメーションを追加 */
+      }
+
+      /* ホバー時にアニメーション（全ての円に共通） */
+      .circle:hover {
+        transform: scale(1.5);
+        transition: transform 0.6s;
+      }
+
+      .label {
+        text-align: center;
+        font-size: 16px;
+        margin-top: 10px;
+        color: #333;
+      }
+
+      /* アニメーション定義 */
+      @keyframes scale-easeInElastic {
         0% {
           transform: scale(1);
         }
 
-        16% {
-          transform: scale(-0.32);
+        4% {
+          transform: scale(1);
+        }
+
+        8% {
+          transform: scale(1);
+        }
+
+        14% {
+          transform: scale(1);
+        }
+
+        18% {
+          transform: scale(1);
+        }
+
+        26% {
+          transform: scale(1.01);
         }
 
         28% {
-          transform: scale(0.13);
+          transform: scale(1.01);
         }
 
-        44% {
-          transform: scale(-0.05);
+        40% {
+          transform: scale(0.98);
         }
 
-        59% {
-          transform: scale(0.02);
+        42% {
+          transform: scale(0.98);
         }
 
-        73% {
-          transform: scale(-0.01);
+        56% {
+          transform: scale(1.05);
         }
 
-        88% {
-          transform: scale(0);
+        58% {
+          transform: scale(1.04);
+        }
+
+        72% {
+          transform: scale(0.87);
+        }
+
+        86% {
+          transform: scale(1.37);
         }
 
         100% {
           transform: scale(0);
         }
       }
+
+      @keyframes scale-easeInBounce {
+        0% {
+          transform: scale(1);
+        }
+
+        4% {
+          transform: scale(0.98);
+        }
+
+        8% {
+          transform: scale(0.99);
+        }
+
+        18% {
+          transform: scale(0.94);
+        }
+
+        26% {
+          transform: scale(0.98);
+        }
+
+        46% {
+          transform: scale(0.75);
+        }
+
+        64% {
+          transform: scale(0.98);
+        }
+
+        76% {
+          transform: scale(0.44);
+        }
+
+        88% {
+          transform: scale(0.11);
+        }
+
+        100% {
+          transform: scale(0);
+        }
+      }
+      
+      @keyframes scale-easeInOutBounce {
+        0% {
+          transform: scale(1);
+        }
+
+        2% {
+          transform: scale(0.99);
+        }
+
+        4% {
+          transform: scale(1);
+        }
+
+        10% {
+          transform: scale(0.97);
+        }
+
+        14% {
+          transform: scale(0.99);
+        }
+
+        22% {
+          transform: scale(0.88);
+        }
+
+        32% {
+          transform: scale(0.99);
+        }
+
+        42% {
+          transform: scale(0.6);
+        }
+
+        50% {
+          transform: scale(0.5);
+        }
+
+        58% {
+          transform: scale(0.4);
+        }
+
+        68% {
+          transform: scale(0.01);
+        }
+
+        78% {
+          transform: scale(0.12);
+        }
+
+        86% {
+          transform: scale(0.01);
+        }
+
+        90% {
+          transform: scale(0.03);
+        }
+
+        96% {
+          transform: scale(0);
+        }
+
+        98% {
+          transform: scale(0.01);
+        }
+
+        100% {
+          transform: scale(0);
+        }
+      }
+      /**
+ * ----------------------------------------
+ * animation rotate-hor-center
+ * ----------------------------------------
+ */
+      @keyframes rotate-hor-center {
+        0% {
+          -webkit-transform: rotateX(0);
+          transform: rotateX(0);
+        }
+        100% {
+          -webkit-transform: rotateX(-360deg);
+          transform: rotateX(-360deg);
+        }
+      }
+
+      /**
+ * ----------------------------------------
+ * animation rotate-scale-up
+ * ----------------------------------------
+ */
+      @keyframes rotate-scale-up {
+        0% {
+          -webkit-transform: scale(1) rotateZ(0);
+          transform: scale(1) rotateZ(0);
+        }
+        50% {
+          -webkit-transform: scale(2) rotateZ(180deg);
+          transform: scale(2) rotateZ(180deg);
+        }
+        100% {
+          -webkit-transform: scale(1) rotateZ(360deg);
+          transform: scale(1) rotateZ(360deg);
+        }
+      }
+      /**
+ * ----------------------------------------
+ * animation rotate-scale-down-diag-2
+ * ----------------------------------------
+ */
+      @keyframes rotate-scale-down-diag-2 {
+        0% {
+          -webkit-transform: scale(1) rotate3d(-1, 1, 0, 0deg);
+          transform: scale(1) rotate3d(-1, 1, 0, 0deg);
+        }
+        50% {
+          -webkit-transform: scale(0.5) rotate3d(-1, 1, 0, 180deg);
+          transform: scale(0.5) rotate3d(-1, 1, 0, 180deg);
+        }
+        100% {
+          -webkit-transform: scale(1) rotate3d(-1, 1, 0, 360deg);
+          transform: scale(1) rotate3d(-1, 1, 0, 360deg);
+        }
+      }
+      /**
+ * ----------------------------------------
+ * animation shadow-drop-2-center
+ * ----------------------------------------
+ */
+      @keyframes shadow-drop-2-center {
+        0% {
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+          -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+          box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        }
+        100% {
+          -webkit-transform: translateZ(50px);
+          transform: translateZ(50px);
+          -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+        }
+      }
     </style>
   </head>
   <body>
-    <div id="box"></div>
+    <div class="container">
+      <!-- 上段の円 -->
+      <div>
+        <div class="circle circle-1-easeInBack"></div>
+        <div class="label">easeInBack</div>
+      </div>
+      <div>
+        <div class="circle circle-2-easeOutBack"></div>
+        <div class="label">easeOutBack</div>
+      </div>
+      <div>
+        <div class="circle circle-3-easeInOutBack"></div>
+        <div class="label">easeInOutBack</div>
+      </div>
+
+      <!-- 中段の円 -->
+      <div>
+        <div class="circle circle-4-easeInElastic"></div>
+        <div class="label">easeInElastic</div>
+      </div>
+      <div>
+        <div class="circle circle-5-easeInBounce"></div>
+        <div class="label">easeInBounce</div>
+      </div>
+      <div>
+        <div class="circle circle-6-easeInOutBounce"></div>
+        <div class="label">easeInOutBounce</div>
+      </div>
+
+      <!-- 下段の円 -->
+      <div>
+        <div class="circle circle-7-rotate-hor-center"></div>
+        <div class="label">rotate-hor-center</div>
+      </div>
+      <div>
+        <div class="circle circle-8-rotate-scale-down-diag-2"></div>
+        <div class="label">rotate-scale-down-diag-2</div>
+      </div>
+      <div>
+        <div class="circle circle-9-shadow-drop-2-center"></div>
+        <div class="label">shadow-drop-2-center</div>
+      </div>
+    </div>
   </body>
+  <div class="next">
+    <a href="page2.html">次のページへ</a>
+  </div>
+</body>
 </html>
